@@ -162,84 +162,78 @@
     </div>
   </section>
 
-  <!-- DEMOS -->
-  <section id="demos">
-    <div class="container">
-      <h2>Demo</h2>
-      <div class="grid" style="margin-top:12px">
-        <!-- 主展示视频（16:9，可替换为你的 mp4 / webm） -->
-        <div class="col-12">
-          <div class="media">
-            <!-- 如果需要自动播放：autoplay muted loop playsinline -->
-            <video class="poster" controls preload="metadata" poster="assets/cover.jpg">
-              <source src="media/main_demo.mp4" type="video/mp4" />
-              <!-- <source src="media/main_demo.webm" type="video/webm" /> -->
-              Your browser does not support the video tag.
-            </video>
-            <div class="caption">Main Demo — Overview</div>
-          </div>
-        </div>
 
-        <!-- 子示例：三列图/动图 -->
-        <h2>Single Building Generation</h2>
-        <div class="col-4">
-          <div class="media">
-            <img class="poster" src="videos/chinese_building01.gif" alt="Block-level layout generation" />
-          </div>
+<!-- DEMOS -->
+<section id="demos">
+  <div class="container">
+    <h2>Demo</h2>
+
+    <!-- 主展示视频 -->
+    <div class="row mt-3">
+      <div class="col-12">
+        <div class="media">
+          <!-- 如果需要自动播放：autoplay muted loop playsinline -->
+          <video class="poster w-100" controls preload="metadata" poster="assets/cover.jpg">
+            <source src="media/main_demo.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="caption">Main Demo — Overview</div>
         </div>
-        <div class="col-4">
-          <div class="media">
-            <img class="poster" src="videos/chinese_building02.gif" alt="Semantic field control" />
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="media">
-            <img class="poster" src="videos/chinese_building03.gif" alt="Infinite outpainting" />
-          </div>
-        </div>
-        <h2>Scene-level Generation</h2>
-        <div class="col-4">
-          <div class="media">
-            <img class="poster" src="videos/modern_4block.gif" alt="Block-level layout generation" />
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="media">
-            <img class="poster" src="videos/chinese_4block.gif" alt="Semantic field control" />
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="media">
-            <img class="poster" src="videos/chinese_night_4block.gif" alt="Infinite outpainting" />
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="media">
-            <img class="poster" src="videos/chinese_building01.gif" alt="Block-level layout generation" />
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="media">
-            <img class="poster" src="videos/chinese_building02.gif" alt="Semantic field control" />
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="media">
-            <img class="poster" src="videos/chinese_building03.gif" alt="Infinite outpainting" />
-          </div>
-        </div>
-        <!-- 可选：嵌入 Web 交互（若有 Three.js/WebGL Demo） -->
-        <!--
-        <div class="col-12">
-          <div class="media" style="height:560px">
-            <iframe src="interactive/index.html" title="Interactive Viewer" style="width:100%; height:100%; border:0; background:#111"></iframe>
-            <div class="caption">Interactive Viewer</div>
-          </div>
-        </div>
-        -->
       </div>
     </div>
-  </section>
+
+    <!-- 单体建筑展示：标题行 + 三个 GIF 横排 -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <h2 class="h4 mb-2">Single Building Generation</h2>
+      </div>
+    </div>
+    <div class="row g-3 mt-1">
+      <div class="col-12 col-md-4">
+        <div class="media text-center">
+          <img class="poster img-fluid" src="videos/chinese_building01.gif" alt="Traditional building" />
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="media text-center">
+          <img class="poster img-fluid" src="videos/chinese_building02.gif" alt="Modern building" />
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="media text-center">
+          <img class="poster img-fluid" src="videos/chinese_building03.gif" alt="Night building" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 场景级展示：标题行 + 三个 GIF 横排 -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <h2 class="h4 mb-2">Scene-level</h2>
+      </div>
+    </div>
+    <div class="row g-3 mt-1">
+      <div class="col-12 col-md-4">
+        <div class="media text-center">
+          <img class="poster img-fluid" src="videos/modern_4block.gif" alt="Modern 4-block scene" />
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="media text-center">
+          <img class="poster img-fluid" src="videos/chinese_4block.gif" alt="Chinese 4-block scene" />
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="media text-center">
+          <img class="poster img-fluid" src="videos/chinese_night_4block.gif" alt="Chinese night 4-block" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 可选：再加下一组就重复“标题行 + 三图行”的结构 -->
+  </div>
+</section>
+
 
 
 
