@@ -1,19 +1,278 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Anonymous Demo</title>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+  <title>IMAGINE A CITY: CITYGENAGENT FOR PROCEDURAL 3D CITY GENERATION</title>
+  <meta
+    name="description"
+    content="Project page for IMAGINE A CITY: CITYGENAGENT FOR PROCEDURAL 3D CITY GENERATION. Abstract, demos, and resources."
+  />
+  <meta property="og:title" content="IMAGINE A CITY: CITYGENAGENT FOR PROCEDURAL 3D CITY GENERATION" />
+  <meta property="og:description" content="Abstract, demos, and resources." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://CityGenAgent.github.io/" />
+  <!-- 可替换为你的封面图 -->
+  <meta property="og:image" content="assets/cover.jpg" />
+  <link rel="icon" href="assets/favicon.png" />
+
   <style>
-    body { background-color: #111; color: white; text-align: center; font-family: sans-serif; }
-    video, img { max-width: 80%; margin: 20px auto; display: block; }
+    :root{
+      --bg: #0e0f12;
+      --text: #e8eaed;
+      --muted: #b7b8bd;
+      --card: #15171c;
+      --brand: #6bc1ff;
+      --accent: #ffd166;
+      --border: #23262d;
+      --maxw: 1050px;
+    }
+    @media (prefers-color-scheme: light) {
+      :root{ --bg:#ffffff; --text:#1a1a1a; --muted:#4b5563; --card:#f8fafc; --brand:#2563eb; --accent:#f59e0b; --border:#e5e7eb; }
+    }
+
+    html, body { margin:0; padding:0; background:var(--bg); color:var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; line-height:1.6; }
+    a { color:var(--brand); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    img, video { max-width:100%; display:block; }
+    .container { width:100%; max-width: var(--maxw); margin:0 auto; padding: 0 20px; box-sizing:border-box; }
+
+    /* Header / Nav */
+    .nav {
+      position: sticky; top:0; z-index: 50;
+      backdrop-filter: blur(8px);
+      background: color-mix(in oklab, var(--bg) 92%, transparent);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
+    .brand { font-weight:700; letter-spacing:.2px; }
+    .nav a { margin-left:18px; color:var(--text); opacity:.9; }
+    .nav a:hover { opacity:1; }
+
+    /* Hero */
+    .hero { padding: 48px 0 28px; }
+    .title { font-size: clamp(26px, 4.2vw, 42px); line-height:1.15; font-weight: 800; letter-spacing:.3px; }
+    .subtitle { margin-top:10px; color:var(--muted); font-size: clamp(14px, 2.2vw, 16px); }
+
+    /* Sections */
+    section { padding: 28px 0; border-top:1px solid var(--border); }
+    h2 { font-size: clamp(20px, 3vw, 26px); line-height:1.25; margin:0 0 8px; }
+    .muted { color:var(--muted); }
+    .card {
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    /* Demo grid */
+    .grid { display:grid; gap:16px; grid-template-columns: repeat(12, 1fr); }
+    .col-12 { grid-column: span 12; }
+    .col-6 { grid-column: span 6; }
+    .col-4 { grid-column: span 4; }
+    @media (max-width: 900px) {
+      .col-6 { grid-column: span 12; }
+      .col-4 { grid-column: span 6; }
+    }
+    @media (max-width: 640px) {
+      .col-4 { grid-column: span 12; }
+    }
+
+    .media { position: relative; overflow: hidden; border-radius: 10px; border:1px solid var(--border); background:#000; }
+    .media .caption {
+      position:absolute; left:10px; bottom:10px; padding:6px 10px; border-radius:8px;
+      background: color-mix(in oklab, #000 65%, transparent);
+      color:#fff; font-size:12px; letter-spacing:.2px;
+    }
+    .poster {
+      aspect-ratio: 16/9; width:100%; object-fit: cover;
+    }
+
+    /* Links row */
+    .links { display:flex; flex-wrap: wrap; gap:10px; margin-top:12px; }
+    .btn {
+      display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:10px;
+      background: var(--card); color:var(--text); border:1px solid var(--border); font-weight:600;
+    }
+    .btn:hover { background: color-mix(in oklab, var(--card) 85%, var(--brand) 15%); text-decoration:none; }
+
+    /* Footer */
+    footer { padding:28px 0 48px; color:var(--muted); text-align:center; }
+
+    /* Small helper */
+    code { background: color-mix(in oklab, var(--card) 85%, #000 15%); padding:2px 6px; border-radius:6px; border:1px solid var(--border); }
   </style>
 </head>
 <body>
-  <h1>Imagine a City</h1>
-  <video autoplay loop muted>
-    <source src="media/demo.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-  <img src="media/demo.gif" alt="GIF 演示">
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">CityGenAgent</div>
+      <nav>
+        <a href="#abstract">Abstract</a>
+        <a href="#demos">Demos</a>
+        <a href="#resources">Resources</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="title">
+        IMAGINE A CITY: CITYGENAGENT FOR PROCEDURAL 3D CITY GENERATION
+      </h1>
+      <p class="subtitle">
+        <span class="muted">A project page for procedural, controllable, and scalable 3D city generation demos.</span>
+      </p>
+
+      <!-- 可选：作者/单位（如需匿名可删除此块） -->
+      <!--
+      <p class="muted" style="margin-top:8px">
+        <strong>Authors:</strong> Anonymous Submission
+      </p>
+      -->
+      <div class="links">
+        <!-- 替换为你的真实链接或删除 -->
+        <a class="btn" href="#" target="_blank" rel="noopener">📄 Paper (PDF)</a>
+        <a class="btn" href="#" target="_blank" rel="noopener">🧠 Code</a>
+        <a class="btn" href="#demos">🎬 Demos</a>
+    </div>
+    </div>
+  </section>
+
+  <!-- ABSTRACT -->
+  <section id="abstract">
+    <div class="container">
+      <h2>Abstract</h2>
+      <div class="card">
+        <p>
+          We present <em>CityGenAgent</em>, an agentic pipeline for <strong>procedural 3D city generation</strong>
+          that unifies layout synthesis, controllable semantics, and multi-scale rendering into a single framework.
+          Given high-level intents or sparse constraints, CityGenAgent decomposes generation into iterative planning,
+          asset-aware placement, and geometry-aware refinement, enabling <strong>controllability</strong>,
+          <strong>diversity</strong>, and <strong>scalability</strong> across city blocks to metropolitan scale.
+        </p>
+        <p class="muted" style="margin-top:8px">
+          <!-- 这里替换为最终摘要 -->
+          <em>Replace this paragraph with your final abstract.
+          Keep it concise (120–180 words) and highlight problem, method, and key results.</em>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMOS -->
+  <section id="demos">
+    <div class="container">
+      <h2>Demos</h2>
+      <p class="muted">Below are placeholders for videos and GIFs. Replace sources with your media files.</p>
+
+      <div class="grid" style="margin-top:12px">
+        <!-- 主展示视频（16:9，可替换为你的 mp4 / webm） -->
+        <div class="col-12">
+          <div class="media">
+            <!-- 如果需要自动播放：autoplay muted loop playsinline -->
+            <video class="poster" controls preload="metadata" poster="assets/cover.jpg">
+              <source src="media/main_demo.mp4" type="video/mp4" />
+              <!-- <source src="media/main_demo.webm" type="video/webm" /> -->
+              Your browser does not support the video tag.
+            </video>
+            <div class="caption">Main Demo — Overview</div>
+          </div>
+        </div>
+
+        <!-- 子示例：三列图/动图 -->
+        <div class="col-4">
+          <div class="media">
+            <img class="poster" src="media/demo_1.gif" alt="Block-level layout generation" />
+            <div class="caption">Block Layout</div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="media">
+            <img class="poster" src="media/demo_2.gif" alt="Semantic field control" />
+            <div class="caption">Semantic Control</div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="media">
+            <img class="poster" src="media/demo_3.gif" alt="Infinite outpainting" />
+            <div class="caption">Infinite Outpainting</div>
+          </div>
+        </div>
+
+        <!-- 可选：嵌入 Web 交互（若有 Three.js/WebGL Demo） -->
+        <!--
+        <div class="col-12">
+          <div class="media" style="height:560px">
+            <iframe src="interactive/index.html" title="Interactive Viewer" style="width:100%; height:100%; border:0; background:#111"></iframe>
+            <div class="caption">Interactive Viewer</div>
+          </div>
+        </div>
+        -->
+      </div>
+    </div>
+  </section>
+
+  <!-- RESOURCES -->
+  <section id="resources">
+    <div class="container">
+      <h2>Resources</h2>
+      <div class="card">
+        <ul>
+          <li><strong>Paper:</strong> <a href="#" target="_blank" rel="noopener">PDF</a> · <a href="#" target="_blank" rel="noopener">arXiv</a></li>
+          <li><strong>Code:</strong> <a href="#" target="_blank" rel="noopener">GitHub</a></li>
+          <li><strong>Dataset / Assets:</strong> <a href="#" target="_blank" rel="noopener">Link 1</a> · <a href="#" target="_blank" rel="noopener">Link 2</a></li>
+          <li><strong>Slides / Poster:</strong> <a href="#" target="_blank" rel="noopener">Slides</a> · <a href="#" target="_blank" rel="noopener">Poster</a></li>
+        </ul>
+        <p class="muted" style="margin-top:8px">Replace these links with your actual materials. Remove items you don’t use.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CITATION -->
+  <section id="citation">
+    <div class="container">
+      <h2>Citation</h2>
+      <div class="card">
+        <p class="muted">Replace with your BibTeX once the paper is available.</p>
+<pre><code>@article{yourkey2025citygenagent,
+  title   = {IMAGINE A CITY: CITYGENAGENT FOR PROCEDURAL 3D CITY GENERATION},
+  author  = {Anonymous},
+  journal = {Preprint},
+  year    = {2025},
+  url     = {https://CityGenAgent.github.io}
+}
+</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 CityGenAgent. All rights reserved.</p>
+      <p class="muted">This site is a static page served via GitHub Pages.</p>
+    </div>
+  </footer>
+
+  <!-- 平滑滚动（可选） -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        const el = document.querySelector(id);
+        if(!el) return;
+        e.preventDefault();
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+        history.pushState(null,null,id);
+      });
+    });
+  </script>
 </body>
 </html>
