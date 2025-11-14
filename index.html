@@ -60,25 +60,13 @@
     /* Sections */
     section { padding: 28px 0; border-top:1px solid var(--border); }
     h2 { font-size: clamp(20px, 3vw, 26px); line-height:1.25; margin:0 0 8px; }
+    h3 { font-size: clamp(18px, 2.5vw, 22px); line-height:1.3; margin:24px 0 12px; }
     .muted { color:var(--muted); }
     .card {
       background: var(--card);
       border:1px solid var(--border);
       border-radius: 12px;
       padding: 18px;
-    }
-
-    /* Demo grid */
-    .grid { display:grid; gap:16px; grid-template-columns: repeat(12, 1fr); }
-    .col-12 { grid-column: span 12; }
-    .col-6 { grid-column: span 6; }
-    .col-4 { grid-column: span 4; }
-    @media (max-width: 900px) {
-      .col-6 { grid-column: span 12; }
-      .col-4 { grid-column: span 6; }
-    }
-    @media (max-width: 640px) {
-      .col-4 { grid-column: span 12; }
     }
 
     .media { position: relative; overflow: hidden; border-radius: 10px; border:1px solid var(--border); background:#000; }
@@ -104,6 +92,39 @@
 
     /* Small helper */
     code { background: color-mix(in oklab, var(--card) 85%, #000 15%); padding:2px 6px; border-radius:6px; border:1px solid var(--border); }
+    
+    /* Demo section specific styles */
+    .demo-section { margin-bottom: 32px; }
+    .demo-title { margin-bottom: 16px; }
+    
+    /* 确保三个建筑GIF在同一行显示 */
+    .building-row {
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+    }
+    .building-item {
+      flex: 1;
+      min-width: 0; /* 防止flex项目溢出 */
+    }
+    
+    /* 确保场景级GIF也在同一行 */
+    .scene-row {
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+    }
+    .scene-item {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    /* 只在非常小的屏幕上才垂直排列 */
+    @media (max-width: 640px) {
+      .building-row, .scene-row {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
@@ -162,81 +183,62 @@
     </div>
   </section>
 
-
-<!-- DEMOS -->
-<section id="demos">
-  <div class="container">
-    <h2>Demo</h2>
-
-    <!-- 主展示视频 -->
-    <div class="row mt-3">
-      <div class="col-12">
+  <!-- DEMOS -->
+  <section id="demos">
+    <div class="container">
+      <h2>Demos</h2>
+      
+      <!-- Main Demo Video -->
+      <div class="demo-section">
+        <h3 class="demo-title">Main Demo Video</h3>
         <div class="media">
-          <!-- 如果需要自动播放：autoplay muted loop playsinline -->
-          <video class="poster w-100" controls preload="metadata" poster="assets/cover.jpg">
+          <video class="poster" controls preload="metadata" poster="assets/cover.jpg">
             <source src="media/main_demo.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          <div class="caption">Main Demo — Overview</div>
+          <div class="caption">Overview of CityGenAgent's capabilities</div>
+        </div>
+      </div>
+      
+      <!-- Single Building Generation -->
+      <div class="demo-section">
+        <h3 class="demo-title">Single Building Generation</h3>
+        <div class="building-row">
+          <div class="building-item media">
+            <img class="poster" src="videos/chinese_building01.gif" alt="Traditional Chinese building" />
+            <div class="caption">Traditional Chinese Building</div>
+          </div>
+          <div class="building-item media">
+            <img class="poster" src="videos/modern_building.gif" alt="Modern Chinese building" />
+            <div class="caption">Modern Building</div>
+          </div>
+          <div class="building-item media">
+            <img class="poster" src="videos/chinese_building03.gif" alt="Night scene building" />
+            <div class="caption">Night Scene Building</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Scene-level Generation -->
+      <div class="demo-section">
+        <h3 class="demo-title">Scene-level Generation</h3>
+        <div class="scene-row">
+          <div class="scene-item media">
+            <img class="poster" src="videos/modern_4block.gif" alt="Modern 4-block scene" />
+            <div class="caption">Modern Scene (4 Blocks)</div>
+          </div>
+          <div class="scene-item media">
+            <img class="poster" src="videos/chinese_4block.gif" alt="Chinese 4-block scene" />
+            <div class="caption">Chinese Scene (4 Blocks)</div>
+          </div>
+          <div class="scene-item media">
+            <img class="poster" src="videos/chinese_night_4block.gif" alt="Chinese night 4-block scene" />
+            <div class="caption">Chinese Scene (1 Block, In The Night)</div>
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- 单体建筑展示：标题行 + 三个 GIF 横排 -->
-    <div class="row mt-4">
-      <div class="col-12">
-        <h2 class="h4 mb-2">Single Building Generation</h2>
-      </div>
-    </div>
-    <div class="row g-3 mt-1">
-      <div class="col-12 col-md-4">
-        <div class="media text-center">
-          <img class="poster img-fluid" src="videos/chinese_building01.gif" alt="Traditional building" />
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="media text-center">
-          <img class="poster img-fluid" src="videos/chinese_building02.gif" alt="Modern building" />
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="media text-center">
-          <img class="poster img-fluid" src="videos/chinese_building03.gif" alt="Night building" />
-        </div>
-      </div>
-    </div>
-
-    <!-- 场景级展示：标题行 + 三个 GIF 横排 -->
-    <div class="row mt-4">
-      <div class="col-12">
-        <h2 class="h4 mb-2">Scene-level</h2>
-      </div>
-    </div>
-    <div class="row g-3 mt-1">
-      <div class="col-12 col-md-4">
-        <div class="media text-center">
-          <img class="poster img-fluid" src="videos/modern_4block.gif" alt="Modern 4-block scene" />
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="media text-center">
-          <img class="poster img-fluid" src="videos/chinese_4block.gif" alt="Chinese 4-block scene" />
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="media text-center">
-          <img class="poster img-fluid" src="videos/chinese_night_4block.gif" alt="Chinese night 4-block" />
-        </div>
-      </div>
-    </div>
-
-    <!-- 可选：再加下一组就重复“标题行 + 三图行”的结构 -->
-  </div>
-</section>
-
-
-
-
+  </section>
 
   <footer>
     <div class="container">
