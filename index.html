@@ -60,13 +60,25 @@
     /* Sections */
     section { padding: 28px 0; border-top:1px solid var(--border); }
     h2 { font-size: clamp(20px, 3vw, 26px); line-height:1.25; margin:0 0 8px; }
-    h3 { font-size: clamp(18px, 2.5vw, 22px); line-height:1.3; margin:24px 0 12px; }
     .muted { color:var(--muted); }
     .card {
       background: var(--card);
       border:1px solid var(--border);
       border-radius: 12px;
       padding: 18px;
+    }
+
+    /* Demo grid */
+    .grid { display:grid; gap:16px; grid-template-columns: repeat(12, 1fr); }
+    .col-12 { grid-column: span 12; }
+    .col-6 { grid-column: span 6; }
+    .col-4 { grid-column: span 4; }
+    @media (max-width: 900px) {
+      .col-6 { grid-column: span 12; }
+      .col-4 { grid-column: span 6; }
+    }
+    @media (max-width: 640px) {
+      .col-4 { grid-column: span 12; }
     }
 
     .media { position: relative; overflow: hidden; border-radius: 10px; border:1px solid var(--border); background:#000; }
@@ -92,39 +104,6 @@
 
     /* Small helper */
     code { background: color-mix(in oklab, var(--card) 85%, #000 15%); padding:2px 6px; border-radius:6px; border:1px solid var(--border); }
-    
-    /* Demo section specific styles */
-    .demo-section { margin-bottom: 32px; }
-    .demo-title { margin-bottom: 16px; }
-    
-    /* 确保三个建筑GIF在同一行显示 */
-    .building-row {
-      display: flex;
-      gap: 16px;
-      justify-content: space-between;
-    }
-    .building-item {
-      flex: 1;
-      min-width: 0; /* 防止flex项目溢出 */
-    }
-    
-    /* 确保场景级GIF也在同一行 */
-    .scene-row {
-      display: flex;
-      gap: 16px;
-      justify-content: space-between;
-    }
-    .scene-item {
-      flex: 1;
-      min-width: 0;
-    }
-    
-    /* 只在非常小的屏幕上才垂直排列 */
-    @media (max-width: 640px) {
-      .building-row, .scene-row {
-        flex-direction: column;
-      }
-    }
   </style>
 </head>
 <body>
@@ -149,7 +128,7 @@
         IMAGINE A CITY: CITYGENAGENT FOR PROCEDURAL 3D CITY GENERATION
       </h1>
       <p class="subtitle">
-        <span class="muted">A project page for procedural, controllable, and scalable 3D city generation.</span>
+        <span class="muted">A project page for procedural, controllable, and scalable 3D city generation demos.</span>
       </p>
 
       <!-- 可选：作者/单位（如需匿名可删除此块） -->
@@ -160,8 +139,8 @@
       -->
       <div class="links">
         <!-- 替换为你的真实链接或删除 -->
-        <a class="btn" href="#" target="_blank" rel="noopener">📄 Paper (Under Reviewed)</a>
-        <a class="btn" href="#" target="_blank" rel="noopener">🧠 Code(Coming Soon)</a>
+        <a class="btn" href="#" target="_blank" rel="noopener">📄 Paper (PDF)</a>
+        <a class="btn" href="#" target="_blank" rel="noopener">🧠 Code</a>
         <a class="btn" href="#demos">🎬 Demos</a>
     </div>
     </div>
@@ -173,9 +152,16 @@
       <h2>Abstract</h2>
       <div class="card">
         <p>
-          <p>
-            The automated generation of interactive 3D cities is a critical challenge with broad applications in autonomous driving, virtual reality, and embodied intelligence. While recent advances in generative models and procedural techniques have improved the realism and scalability of city generation, existing methods often struggle with high-fidelity asset creation, controllability, and manipulation. In this work, we present CityGenAgent, a natural language-driven framework based on large language models (LLMs) for hierarchical procedural generation of high-quality 3D cities. Our approach introduces two core programs—<strong>Block Program</strong> and <strong>Building Program</strong>—which decompose city generation into interpretable and editable components. <strong>BlockGen</strong> and <strong>BuildingGen</strong> are trained to generate and execute these programs. We design Spatial Alignment Reward to enhance spatial reasoning and Visual Consistency Reward to bridge the gap between textual program descriptions and their 3D visual realizations. 
-            Additionally, benefiting from the use of programs and the model's generalization capabilities, our framework allows users to manipulate the results via natural language. Comprehensive evaluations show that CityGenAgent achieves impressive semantic alignment and higher visual quality, establishing a stronger foundation for broad applications.            
+          We present <em>CityGenAgent</em>, an agentic pipeline for <strong>procedural 3D city generation</strong>
+          that unifies layout synthesis, controllable semantics, and multi-scale rendering into a single framework.
+          Given high-level intents or sparse constraints, CityGenAgent decomposes generation into iterative planning,
+          asset-aware placement, and geometry-aware refinement, enabling <strong>controllability</strong>,
+          <strong>diversity</strong>, and <strong>scalability</strong> across city blocks to metropolitan scale.
+        </p>
+        <p class="muted" style="margin-top:8px">
+          <!-- 这里替换为最终摘要 -->
+          <em>Replace this paragraph with your final abstract.
+          Keep it concise (120–180 words) and highlight problem, method, and key results.</em>
         </p>
       </div>
     </div>
@@ -185,74 +171,85 @@
   <section id="demos">
     <div class="container">
       <h2>Demos</h2>
-      
-      <!-- Main Demo Video -->
-      <div class="demo-section">
-        <div class="media">
-          <video class="poster" controls preload="metadata">
-            <source src="videos/demo_4.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="demo-section">
+      <p class="muted">Below are placeholders for videos and GIFs. Replace sources with your media files.</p>
+
+      <div class="grid" style="margin-top:12px">
+        <!-- 主展示视频（16:9，可替换为你的 mp4 / webm） -->
+        <div class="col-12">
           <div class="media">
-            <video class="poster" controls preload="metadata">
-              <source src="videos/demo_3.mp4" type="video/mp4" />
+            <!-- 如果需要自动播放：autoplay muted loop playsinline -->
+            <video class="poster" controls preload="metadata" poster="assets/cover.jpg">
+              <source src="media/main_demo.mp4" type="video/mp4" />
+              <!-- <source src="media/main_demo.webm" type="video/webm" /> -->
               Your browser does not support the video tag.
             </video>
-          </div>
-          <div class="demo-section">
-            <div class="media">
-              <video class="poster" controls preload="metadata">
-                <source src="videos/demo_1.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-            <div class="demo-section">
-              <div class="media">
-                <video class="poster" controls preload="metadata">
-                  <source src="videos/demo_2.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-      </div>
-      
-      <!-- Single Building Generation -->
-      <div class="demo-section">
-        <h3 class="demo-title">Single Building Generation</h3>
-        <div class="building-row">
-          <div class="building-item media">
-            <img class="poster" src="videos/chinese_building01.gif" alt="Traditional Chinese building" />
-            <div class="caption">Traditional Chinese Building</div>
-          </div>
-          <div class="building-item media">
-            <img class="poster" src="videos/modern_building.gif" alt="Modern Chinese building" />
-            <div class="caption">Modern Building</div>
-          </div>
-          <div class="building-item media">
-            <img class="poster" src="videos/chinese_building03.gif" alt="Night scene building" />
-            <div class="caption">Night Scene Building</div>
+            <div class="caption">Main Demo — Overview</div>
           </div>
         </div>
-      </div>
-      
-      <!-- Scene-level Generation -->
-      <div class="demo-section">
-        <h3 class="demo-title">Scene-level Generation</h3>
-        <div class="scene-row">
-          <div class="scene-item media">
-            <img class="poster" src="videos/modern_4block.gif" alt="Modern 4-block scene" />
-            <div class="caption">Modern Scene (4 Blocks)</div>
-          </div>
-          <div class="scene-item media">
-            <img class="poster" src="videos/chinese_4block.gif" alt="Chinese 4-block scene" />
-            <div class="caption">Chinese Scene (4 Blocks)</div>
-          </div>
-          <div class="scene-item media">
-            <img class="poster" src="videos/chinese_night_4block.gif" alt="Chinese night 4-block scene" />
-            <div class="caption">Chinese Scene (1 Block, In The Night)</div>
+
+        <!-- 子示例：三列图/动图 -->
+        <div class="col-4">
+          <div class="media">
+            <img class="poster" src="media/demo_1.gif" alt="Block-level layout generation" />
+            <div class="caption">Block Layout</div>
           </div>
         </div>
+        <div class="col-4">
+          <div class="media">
+            <img class="poster" src="media/demo_2.gif" alt="Semantic field control" />
+            <div class="caption">Semantic Control</div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="media">
+            <img class="poster" src="media/demo_3.gif" alt="Infinite outpainting" />
+            <div class="caption">Infinite Outpainting</div>
+          </div>
+        </div>
+
+        <!-- 可选：嵌入 Web 交互（若有 Three.js/WebGL Demo） -->
+        <!--
+        <div class="col-12">
+          <div class="media" style="height:560px">
+            <iframe src="interactive/index.html" title="Interactive Viewer" style="width:100%; height:100%; border:0; background:#111"></iframe>
+            <div class="caption">Interactive Viewer</div>
+          </div>
+        </div>
+        -->
+      </div>
+    </div>
+  </section>
+
+  <!-- RESOURCES -->
+  <section id="resources">
+    <div class="container">
+      <h2>Resources</h2>
+      <div class="card">
+        <ul>
+          <li><strong>Paper:</strong> <a href="#" target="_blank" rel="noopener">PDF</a> · <a href="#" target="_blank" rel="noopener">arXiv</a></li>
+          <li><strong>Code:</strong> <a href="#" target="_blank" rel="noopener">GitHub</a></li>
+          <li><strong>Dataset / Assets:</strong> <a href="#" target="_blank" rel="noopener">Link 1</a> · <a href="#" target="_blank" rel="noopener">Link 2</a></li>
+          <li><strong>Slides / Poster:</strong> <a href="#" target="_blank" rel="noopener">Slides</a> · <a href="#" target="_blank" rel="noopener">Poster</a></li>
+        </ul>
+        <p class="muted" style="margin-top:8px">Replace these links with your actual materials. Remove items you don’t use.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CITATION -->
+  <section id="citation">
+    <div class="container">
+      <h2>Citation</h2>
+      <div class="card">
+        <p class="muted">Replace with your BibTeX once the paper is available.</p>
+<pre><code>@article{yourkey2025citygenagent,
+  title   = {IMAGINE A CITY: CITYGENAGENT FOR PROCEDURAL 3D CITY GENERATION},
+  author  = {Anonymous},
+  journal = {Preprint},
+  year    = {2025},
+  url     = {https://CityGenAgent.github.io}
+}
+</code></pre>
       </div>
     </div>
   </section>
